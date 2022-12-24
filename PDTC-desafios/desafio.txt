@@ -1,0 +1,32 @@
+DESAFIO JS - Jubilacion
+En Argentina, el sistema prevé que los hombres puedan acceder al beneficio a partir de los 65 años y las mujeres a los 60, siempre y cuando cuenten con al menos 30 años de aportes. (...)
+ EJERCICIO 1
+Teniendo en cuenta la data previamente expuesta, arme un programa que le pregunte al usuario:
+-su nombre.
+-su edad.
+-su género (binario: mujer u hombre )
+En caso que el usuario tenga la edad necesario (65 varon, 60 mujer), el programa debe ASUMIR que tiene los 30 años de aportes necesarios y determine, según la edad y género, si puede jubilarse o no.
+
+EXAMPLE CASES: INPUTS / EXPECTED OUTPUTS:
+Laura, 30 años // EO:Bienvenida a ANSeS Nadia: usted no puede jubilarse todavia.
+Jose, 65 años // EO: Bienvenido a ANSeS Jose: usted puede tramitar su jubilacion.
+Olga, 61 años // EO: Bienvenida, usted puede tramitar su jubilacion.
+
+Notas:
+-notar que el mensaje de bienvenida, cambia según el género ("Bienvenido" / "Bienvenida")
+
+
+ EJERCICIO2:
+Copie la resolución de su ejercicio anterior aquí abajo, comente el código previo del Ejercicio 1 y haga un refactor de ésta copia de tal forma que:
+- ahora YA NO SE ASUMA si tiene los 30 años de aportes o no, sino que se le pregunte al usuario éste dato y se determine si puede jubilarse o no a partir de ésta "DDJJ" (declaracion jurada).
+Notas: 
+- Estructura del programa: nótese que, la DDJJ sólo podrá "preguntarse"/pedirse si el user es mayor de 65 o 60 años (dependiendo el género binario). Si el user es menor a las edades indicadas respectivamente, se le dirá directamente que no puede jubilarse (y ni se le pedirá que se presente la DDJJ).
+- GOOGLE TIME!: hasta ahora, hemos usado el método prompt() para obtener un dato externo, ingresado por el usuario.
+Existe otro método llamado confirm(). Googlealo y fijate como podrías usarlo respecto a la variable/dato DDJJ (Prestar atención a qué clase de datos devuelve!)
+EXAMPLE CASES: INPUTS / EXPECTED OUTPUTS:
+Laura, 30 años // EO: Bienvenida a ANSeS Nadia: usted no puede jubilarse todavia.
+Martin, 55 años // EO: Bienvenido a ANSeS Martin: usted no puede jubilarse todavia.
+Juan, 72 años, DDJJ false // EO: Bienvenido a ANSeS Juan: usted cuenta con la edad necesaria, pero todavía no tiene los suficientes años de aportes para poder jubilarse.
+Rosa, 62 años, DDJJ true // EO: Bienvenida a ANSeS Rosa: usted puede jubilarse.
+
+

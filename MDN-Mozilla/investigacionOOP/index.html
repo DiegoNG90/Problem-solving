@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./clases.js" defer></script>
+    <style>
+      .login {
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .input-label {
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .input-login {
+        margin-bottom: 1rem;
+      }
+      .form-btn {
+        display: block;
+        border-radius: 15px;
+        background-color: cadetblue;
+        color: crimson;
+        font-size: 1.5rem;
+        padding: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login">
+      <h1>Ingrese su usuario y contraseña</h1>
+      <form action="" method="POST">
+        <hr />
+        <label class="input-label" for="username">Username</label>
+        <input
+          class="input-login"
+          type="text"
+          id="username"
+          name="username"
+          required
+        /><br />
+        <label class="input-label" for="password">Password</label>
+        <input
+          class="input-login"
+          type="password"
+          id="password"
+          name="password"
+          required
+        />
+        <hr />
+        <button class="form-btn" type="button" id="login">Login</button>
+      </form>
+    </div>
+  </body>
+</html>
