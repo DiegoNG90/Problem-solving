@@ -1,26 +1,22 @@
 import TodoList from './components/TodoList/TodoList';
-import withLoading from './patterns/HoC/HoC';
+import withLoading from './patterns/HoC/withLoading';
+import withHover from './patterns/HoC/withDocumentHover';
 
-const TodoListWithLoading = withLoading(
-  TodoList,
-  'https://jsonplaceholder.typicode.com/posts'
+const TodoListWithLoadingAndHover = withHover(
+  withLoading(TodoList, 'https://jsonplaceholder.typicode.com/posts'),
+  'todo-list',
+  'app'
 );
+
 function App() {
   return (
     <>
-      <h1>SIN HOC</h1>
-      <TodoList
-        data={[
-          {
-            userId: 1,
-            id: 1,
-            title: 'delectus aut autem',
-            completed: false,
-          },
-        ]}
-      />
-      <h1>CON HOC</h1>
-      <TodoListWithLoading style={{ backgroundColor: 'red', color: '#fff' }} />
+      <>
+        <h1>CON HOC</h1>
+        <TodoListWithLoadingAndHover
+          style={{ backgroundColor: 'red', color: '#fff' }}
+        />
+      </>
     </>
   );
 }

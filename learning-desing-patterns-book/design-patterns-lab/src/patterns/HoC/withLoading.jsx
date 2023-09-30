@@ -11,7 +11,7 @@ const withLoading = (Component, url) => {
         .catch((e) => console.error('Error', e));
     }, []);
 
-    if (!data) return <div> Loading...</div>;
+    if (!data) return <h2> Loading...</h2>;
 
     return <Component data={data} {...props} />;
   };
