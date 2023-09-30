@@ -1,28 +1,24 @@
-import PropTypes from 'prop-types';
+/* eslint-disable react/prop-types */
+
+import TodoItem from '../TodoItem/TodoItem';
 
 const TodoList = ({ data, ...props }) => {
-  console.log('props from TodoList', props);
+  const { isDocumentHovered, style: styles } = props;
 
   return (
     <>
       {data?.map((todo) => {
         return (
-          <section className="todo-list" key={todo?.id} {...props}>
-            <p>{todo.title}</p>
-            <p>{props.isDocumentHovered && 'HOVER!'}</p>
-          </section>
+          <TodoItem
+            key={todo?.id}
+            todo={todo}
+            isDocumentHovered={isDocumentHovered}
+            styles={styles}
+          />
         );
       })}
     </>
   );
-};
-
-TodoList.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({ id: PropTypes.number, title: PropTypes.string })
-  ),
-  style: PropTypes.shape({}),
-  isDocumentHovered: PropTypes.bool,
 };
 
 export default TodoList;
