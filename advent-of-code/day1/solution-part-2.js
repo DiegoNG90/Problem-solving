@@ -1,52 +1,127 @@
-/**
- * Dada una string separada por saltos de linea, por cada linea (substring?), extraer el 1er y el ultimo numero y sumarlos.
- * En caso que haya 1 solo numero, se repite este mismo.
- */
+const util = require('util')
+
+
+
+// console.log(foo)
 
 const NUMS_0_TO_9_CHAR_CODE_AT = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
+const NUMS_0_TO_9_AS_NUMS = [0,1,2,3,4,5,6,7,8,9]
+const NUMS_ZERO_TO_NINE_AS_STRING = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
-function trebuchet(longString){
+const NUMS_MAP = {
+    "zero": 0 ,
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9 
+}
+
+function trebuchet2(longString){
     const subStringArray = longString.split("\n")
-    const arraysOfNumsOfEachSubString = subStringArray.map(subStr => {
+    const arraysOfAllTypeOfNumsOfEachSubString = subStringArray.map(subStr => {
         let arr = []
+        
+        for(let numStr of NUMS_ZERO_TO_NINE_AS_STRING){
+            if( subStr.includes(numStr) ) {
+                arr.push({[subStr.indexOf(numStr)] : numStr})
+            }
+        }
+
         for (let i = 0; i < subStr.length; i++) {
             if(NUMS_0_TO_9_CHAR_CODE_AT.includes(subStr[i].charCodeAt())){
-                arr.push(subStr[i])
+                arr.push({ [i] : subStr[i]})
             }
+
         }
         return arr
     })
-    
-    const eliminateEmptyStrings = arraysOfNumsOfEachSubString.filter(arr => arr.length )
 
-    const getTheTwoNumsFromStrings = eliminateEmptyStrings.map((arr) => {
-        let newAarr = []
-        if(arr.length > 1) {
-            const num = Number(arr[0].concat(arr[arr.length -1]))
-            newAarr.push(num)
+    const orderedObjectArrayOfAllTheNumsOnEachSubStr = arraysOfAllTypeOfNumsOfEachSubString.map((arrayOfObjs) => {
+        let temp_obj = {}
+        for (const obj of arrayOfObjs) {
+            let allKeys = Object.keys(obj);
+            for (let i = 0; i < allKeys.length; i++) { 
+                temp_obj[allKeys[i]] = obj[allKeys[i]]
+            }
         }
-        if(arr.length === 1){
-            newAarr.push(Number(arr[0].concat(arr[0])))
+        return temp_obj
+    })
+       
+    const eliminatedEmptyObjects = orderedObjectArrayOfAllTheNumsOnEachSubStr.filter((obj) => ! (Object.keys(obj).length === 0) )
+
+    const arrayOfStringsWithTheTwoNumsFromEachObject = eliminatedEmptyObjects.map( ( obj ) => {
+        if (Object.values(obj).length === 1){
+            return Object.values(obj)[0].concat(",", Object.values(obj)[0])
+        } else {
+            return Object.values(obj)[0].concat(",", Object.values(obj)[Object.values(obj).length -1])
         }
-        return newAarr
-    }).flat()
+    })
 
-    const sumOfAllNums = getTheTwoNumsFromStrings.reduce((acc, current) => acc + current, 0)
+    const transformNumsTypeStringToTypeNum = arrayOfStringsWithTheTwoNumsFromEachObject.map((numStr) => {
+        let dividedStrArr = numStr.split(",")
+        let helperStr = ""
 
-    return {
-        // subStringArray,
-        // eliminateEmptyStrings,
-        // getTheTwoNumsFromStrings,
+
+        for (let i = 0; i < dividedStrArr.length; i++) {
+            if (NUMS_0_TO_9_AS_NUMS.includes(Number(dividedStrArr[i]))) {
+                helperStr += dividedStrArr[i]
+            }
+            if(NUMS_ZERO_TO_NINE_AS_STRING.includes(dividedStrArr[i])){
+                helperStr +=  NUMS_MAP[dividedStrArr[i]]
+            } 
+        }
+        return Number(helperStr)
+    })
+
+    const sumOfAllNums = transformNumsTypeStringToTypeNum.reduce((acc, current) => acc + current, 0)
+        
+    const relevantData = {
+        subStringArray,
+        arraysOfAllTypeOfNumsOfEachSubString: JSON.stringify(arraysOfAllTypeOfNumsOfEachSubString),
+        orderedObjectArrayOfAllTheNumsOnEachSubStr: orderedObjectArrayOfAllTheNumsOnEachSubStr,
+        eliminatedEmptyObjects,
+        arrayOfStringsWithTheTwoNumsFromEachObject: arrayOfStringsWithTheTwoNumsFromEachObject,
+        transformNumsTypeStringToTypeNum,
         sumOfAllNums
     }
+
+    return relevantData
 }
 
 const bar = `1abc2
+two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+xtwfivefour6
+xtw9five
 pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet
 `
-console.log(trebuchet(bar))
+
+// console.log(trebuchet2(bar))
+
+const example = `two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen
+`
+
+// console.log(trebuchet2(example))
+
+
+// console.log(util.inspect(trebuchet2(foo), { maxArrayLength: null }))
+
+util.inspect.defaultOptions.maxArrayLength = null; 
 
 
 const foo = `two934seven1
@@ -1048,6 +1123,7 @@ seightwoone8qxcfgszninesvfcnxc68
 strqnb5eightbpnkcjdz6
 fiveninebtpbpjqbgx2bmjrgmprnd
 sixgtxr2fourrdkjg
-fivebxsevensixone872dlx`
+fivebxsevensixone872dlx
+`
 
-console.log(trebuchet(foo))
+ console.log(trebuchet2(foo))

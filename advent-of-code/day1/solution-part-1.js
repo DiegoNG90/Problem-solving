@@ -1,46 +1,57 @@
+/** PART 1
+ * Dada una string separada por saltos de linea, por cada linea (substring?), extraer el 1er y el ultimo numero y sumarlos.
+ * En caso que haya 1 solo numero, se repite este mismo.
+ */
 
-Your puzzle answer was 52974.
+const NUMS_0_TO_9_CHAR_CODE_AT = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
 
---- Day 1: Trebuchet?! ---
-Something is wrong with global snow production, and you've been selected to take a look. The Elves have even given you a map; on it, they've used stars to mark the top fifty locations that are likely to be having problems.
+function trebuchet(longString){
+    const subStringArray = longString.split("\n")
+    const arraysOfNumsOfEachSubString = subStringArray.map(subStr => {
+        let arr = []
+        for (let i = 0; i < subStr.length; i++) {
+            if(NUMS_0_TO_9_CHAR_CODE_AT.includes(subStr[i].charCodeAt())){
+                arr.push(subStr[i])
+            }
+        }
+        return arr
+    })
 
-You've been doing this long enough to know that to restore snow operations, you need to check all fifty stars by December 25th.
+    const eliminateEmptyStrings = arraysOfNumsOfEachSubString.filter(arr => arr.length )
 
-Collect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!
+    const getTheTwoNumsFromStrings = eliminateEmptyStrings.map((arr) => {
+        let newAarr = []
+        if(arr.length > 1) {
+            const num = Number(arr[0].concat(arr[arr.length -1]))
+            newAarr.push(num)
+        }
+        if(arr.length === 1){
+            newAarr.push(Number(arr[0].concat(arr[0])))
+        }
+        return newAarr
+    }).flat()
 
-You try to ask why they can't just use a weather machine ("not powerful enough") and where they're even sending you ("the sky") and why your map looks mostly blank ("you sure ask a lot of questions") and hang on did you just say the sky ("of course, where do you think snow comes from") when you realize that the Elves are already loading you into a trebuchet ("please hold still, we need to strap you in").
+    const sumOfAllNums = getTheTwoNumsFromStrings.reduce((acc, current) => acc + current, 0)
 
-As they're making the final adjustments, they discover that their calibration document (your puzzle input) has been amended by a very young Elf who was apparently just excited to show off her art skills. Consequently, the Elves are having trouble reading the values on the document.
+    return {
+        // subStringArray,
+        // eliminateEmptyStrings,
+        // getTheTwoNumsFromStrings,
+        sumOfAllNums
+    }
+}
 
-The newly-improved calibration document consists of lines of text; each line originally contained a specific calibration value that the Elves now need to recover. On each line, the calibration value can be found by combining the first digit and the last digit (in that order) to form a single two-digit number.
-
-
---- Part Two ---
-Your calculation isn't quite right. It looks like some of the digits are actually spelled out with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".
-
-Equipped with this new information, you now need to find the real first and last digit on each line. For example:
-
-two1nine
-eightwothree
-abcone2threexyz
-xtwone3four
-4nineeightseven2
-zoneight234
-7pqrstsixteen
-In this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76. Adding these together produces 281.
-
-What is the sum of all of the calibration values?
-
-Answer: 
- 
-
-Although it hasn't changed, you can still get your puzzle input.
-
-You can also [Share] this puzzle.
+const bar = `1abc2
+pqr3stu8vwx
+a1b2c3d4e5f
+treb7uchet
+`
 
 
+// console.log(trebuchet(bar))
 
-two934seven1
+
+const foo = `two934seven1
 8825eightknfv
 sevenoneqbfzntsix55
 foursqpqvv192rdrbtcccfourone
@@ -1039,7 +1050,8 @@ seightwoone8qxcfgszninesvfcnxc68
 strqnb5eightbpnkcjdz6
 fiveninebtpbpjqbgx2bmjrgmprnd
 sixgtxr2fourrdkjg
-fivebxsevensixone872dlx
+fivebxsevensixone872dlx`
 
+console.log(trebuchet(foo))
 
-
+module.exports = { foo }
