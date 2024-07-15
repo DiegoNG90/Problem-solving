@@ -9,8 +9,8 @@ const INPUTS_MODULE = require('./inputs')
  */
 
 const NUMS_0_TO_9_CHAR_CODE_AT = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
-const NUMS_0_TO_9_AS_NUMS = [0,1,2,3,4,5,6,7,8,9]
-const NUMS_ZERO_TO_NINE_AS_STRING = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+const NUMS_0_TO_9_AS_NUMS = [1,2,3,4,5,6,7,8,9]
+const NUMS_ZERO_TO_NINE_AS_STRING = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
 const NUMS_MAP = {
     "zero": 0 ,
