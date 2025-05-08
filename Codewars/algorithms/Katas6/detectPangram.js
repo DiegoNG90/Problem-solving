@@ -54,8 +54,12 @@ console.log(isPangram('The quick brown fox jumps over the lazy dog'));
 
 // Solucion comunidad
 
-function isPangram(string) {
+function isPangram2(string) {
   return 'abcdefghijklmnopqrstuvwxyz'
     .split('')
-    .every((x) => string.toLowerCase().includes(x));
+    .every((letter) => string.toLowerCase().includes(letter));
 }
+
+console.log(isPangram2('hola'));
+
+console.log(isPangram2('The quick brown fox jumps over the lazy dog'));
