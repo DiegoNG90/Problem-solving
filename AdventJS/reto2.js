@@ -39,13 +39,11 @@ createFrame(['a', 'bb', 'ccc', 'dddd'])
 */
 
 function createFrame(names) {
-  let longestString = '';
+  if (!names) return frameElement;
 
-  for (let i = 0; i < names.length; i++) {
-    if (names[i].length > longestString.length) {
-      longestString = names[i];
-    }
-  }
+  let longestString = names.reduce((acc, cv) => {
+    return acc.length > cv.length ? acc : cv;
+  }, '');
 
   const lines = '**' + '*'.repeat(longestString.length) + '**';
 
@@ -67,7 +65,6 @@ function createFrame(names) {
 
   return lines + '\n' + createInnerFrame + lines;
 }
-
 console.log(
   createFrame([
     'diego',
